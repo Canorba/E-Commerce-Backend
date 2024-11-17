@@ -74,8 +74,8 @@ public class ProductServiceTest {
 
         Product result = productService.getProductById(1L);
         assertEquals("Product A", result.getName());
-    }
-}
+    }}
+
 Manejo de Errores
 Se ha implementado un manejo robusto de errores para proporcionar respuestas claras y significativas a los clientes de la API.
 
@@ -91,6 +91,7 @@ public ResponseEntity<Object> handleGeneralException(Exception ex) {
     logger.error("Internal server error: {}", ex.getMessage(), ex);
     return new ResponseEntity<>(new ErrorResponse("Internal Server Error", ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 }
+
 Respuesta JSON para Errores
 1. Producto No Encontrado (404)
 Si se busca un producto que no existe:
@@ -98,12 +99,10 @@ Si se busca un producto que no existe:
 Petición:
 
 http
-Copiar código
 GET /api/products/999
 Respuesta:
 
 json
-Copiar código
 {
   "error": "Product Not Found",
   "message": "The product with ID 999 does not exist."
@@ -119,10 +118,11 @@ Copiar código
   "error": "Internal Server Error",
   "message": "An unexpected error occurred."
 }
+
 Dockerización
 Dockerfile
 dockerfile
-Copiar código
+
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY target/ecommerce-backend-0.0.1-SNAPSHOT.jar app.jar
