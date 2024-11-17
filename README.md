@@ -35,7 +35,7 @@ docker-compose up
 
 Sin Docker Compose
 Iniciar el contenedor de la base de datos:
-docker run --name ecommerce-db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=ecommerce -p 3306:3306 -d mariadb:10.5
+docker run --name ecommerce-db -e MYSQL_ROOT_PASSWORD=Baquerok62 -e MYSQL_DATABASE=ecommerce -p 3306:3306 -d mariadb:10.5
 
 Iniciar el contenedor de la aplicación:
 docker run --name ecommerce-backend -p 8080:8080 --link ecommerce-db:ecommerce-db ecommerce-backend
