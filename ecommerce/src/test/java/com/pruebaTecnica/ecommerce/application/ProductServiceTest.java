@@ -6,8 +6,10 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pruebaTecnica.ecommerce.adapters.persistence.ProductRepository;
 import com.pruebaTecnica.ecommerce.domain.Product;
@@ -15,6 +17,7 @@ import com.pruebaTecnica.ecommerce.domain.Product;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+@ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
 
 	@Mock
@@ -61,7 +64,7 @@ public class ProductServiceTest {
 		when(productRepository.findById(1L)).thenReturn(Mono.just(product));
 		when(productRepository.save(updatedProduct)).thenReturn(Mono.just(updatedProduct));
 
-		// Act & Assert
+		// Act & Assertx
 		StepVerifier.create(productService.updateProduct(1L, updatedProduct))
 				.expectNextMatches(p -> p.getName().equals("Updated Product")).verifyComplete();
 
