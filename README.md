@@ -7,14 +7,20 @@ Docker Compose (si necesitas gestionar varios servicios, como la base de datos).
 Maven para la construcción del proyecto (si no se utiliza Docker Compose).
 JDK 17 o superior (para ejecutar Spring Boot).
 Postman para probar y visualizar los endpoints.
+
+El proyecto contiene:
+
+Un Dockerfile para construir la imagen de la aplicación backend.
+Un archivo docker-compose.yml para gestionar tanto la base de datos como la aplicación.
+Código de la API backend desarrollada con Spring Boot.
+
 Instrucciones de Instalación
 Paso 1: Clonar el Repositorio
-Primero, clona el repositorio en tu máquina local:
 
-bash
-Copiar código
+Primero, clona el repositorio en tu máquina local:
 git clone https://github.com/Canorba/E-Commerce-Backend
 cd E-Commerce-Backend
+
 Paso 2: Construir la Imagen Docker
 Construir el archivo JAR: Si estás utilizando Maven, primero debes compilar el proyecto y generar el archivo JAR. Ejecuta el siguiente comando:
 mvn clean package
@@ -37,16 +43,20 @@ docker run --name ecommerce-backend -p 8080:8080 --link ecommerce-db:ecommerce-d
 Documentación de los Servicios con Postman
 Se ha creado una colección en Postman para documentar y probar los servicios del API.
 
+Paso4: 
 Importar la Colección en Postman
 Abre Postman.
 Haz clic en Import.
 Selecciona el archivo ecommerce.postman_collection.json incluido en el proyecto.
 La colección aparecerá en tu lista con todos los endpoints organizados.
+
 Ejecución de los Endpoints
 Configura la variable de entorno base_url en Postman con el valor http://localhost:8080.
 Usa los endpoints para realizar pruebas. Ejemplo:
 GET /api/products: Devuelve todos los productos.
 POST /api/orders: Crea un nuevo pedido.
+
+Paso 5:
 Pruebas Unitarias
 Instrucciones para Ejecutar las Pruebas
 Las pruebas unitarias se han implementado utilizando JUnit 5 y Mockito.
@@ -76,6 +86,7 @@ public class ProductServiceTest {
         assertEquals("Product A", result.getName());
     }}
 
+Paso 6:
 Manejo de Errores
 Se ha implementado un manejo robusto de errores para proporcionar respuestas claras y significativas a los clientes de la API.
 
@@ -119,9 +130,9 @@ Copiar código
   "message": "An unexpected error occurred."
 }
 
+Paso 7:
 Dockerización
 Dockerfile
-dockerfile
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
@@ -161,3 +172,19 @@ services:
 networks:
   ecommerce-network:
     driver: bridge
+
+Construir y Ejecutar la Aplicación con Docker
+
+Para facilitar la ejecución de la aplicación, hemos configurado un **Dockerfile** y un **docker-compose.yml** que permiten construir y ejecutar la aplicación backend dentro de un contenedor Docker.
+
+#### Requisitos previos:
+
+1. Tener **Docker** instalado. Si no lo tienes, sigue la [guía de instalación de Docker](https://docs.docker.com/get-docker/).
+2. Tener **Docker Compose** instalado (si usas el archivo `docker-compose.yml`). Si no lo tienes, sigue la [guía de instalación de Docker Compose](https://docs.docker.com/compose/install/).
+
+#### 7.2 Paso 1: Construir la Imagen Docker
+
+Para construir la imagen Docker, abre una terminal y navega a la raíz del proyecto. Luego ejecuta el siguiente comando:
+
+docker build -t ecommerce-backend .
+
